@@ -184,8 +184,9 @@
                 <application.mode>dev</application.mode>
                 <docs.home>../data/docs</docs.home>
               </systemProperties>
-              <webApp>
-                <contextPath>/docs-web</contextPath>
+<webApp>
+                <contextPath>/</contextPath>
+                <resourceBase>${project.basedir}/src/main/webapp/dist</resourceBase>
                 <overrideDescriptor>${project.basedir}/src/dev/main/webapp/web-override.xml</overrideDescriptor>
               </webApp>
             </configuration>

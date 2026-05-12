@@ -48,14 +48,23 @@ pipeline {
 
         stage('Run containers') {
             steps {
-                // 停止并删除旧容器
-                sh 'docker stop teedy-container-8081 || true'
-                sh 'docker rm teedy-container-8081 || true'
                 
-                // ✅ 使用原生命令启动容器
-                sh 'docker run --name teedy-container-8081 -d -p 8081:8080 ${DOCKER_IMAGE}:${DOCKER_TAG}'
-                
-                // 查看运行状态
+                // =========== 部署第 1 个容器 (8082) ===========
+                sh 'docker stop teedy-container-8082 || true'
+                sh 'docker rm teedy-container-8082 || true'
+                sh 'docker run --name teedy-container-8082 -d -p 8082:8080 ${DOCKER_IMAGE}:${DOCKER_TAG}'
+
+                // =========== 部署第 2 个容器 (8083) ===========
+                sh 'docker stop teedy-container-8083 || true'
+                sh 'docker rm teedy-container-8083 || true'
+                sh 'docker run --name teedy-container-8083 -d -p 8083:8080 ${DOCKER_IMAGE}:${DOCKER_TAG}'
+
+                // =========== 部署第 3 个容器 (8084) ===========
+                sh 'docker stop teedy-container-8084 || true'
+                sh 'docker rm teedy-container-8084 || true'
+                sh 'docker run --name teedy-container-8084 -d -p 8084:8080 ${DOCKER_IMAGE}:${DOCKER_TAG}'
+
+                // =========== 查看所有 teedy 容器的运行状态 ===========
                 sh 'docker ps --filter "name=teedy-container"'
             }
         }
